@@ -1,0 +1,66 @@
+import React from "react";
+import { View, Text, Image, BackHandler } from "react-native";
+import { TextButton } from "../../components";
+import { COLORS, FONTS, SIZES, images } from "../../constants";
+
+const Success = ({ navigation }) => {
+  React.useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => {
+        return true;
+      }
+    );
+    return () => backHandler.remove();
+  }, []);
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        paddingHorizontal: SIZES.padding,
+        backgroundColor: COLORS.white,
+      }}
+    >
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <Image
+          source={images.success}
+          style={{ width: 140, height: 140 }}
+          resizeMode="contain"
+        />
+        <Text style={{ ...FONTS.h1, marginTop: SIZES.padding }}>
+          Congragulations!!
+        </Text>
+        <Text
+          style={{
+            textAlign: "center",
+            marginTop: SIZES.base,
+            color: COLORS.darkGray,
+            ...FONTS.body3,
+          }}
+        >
+          Payment was successfully made.
+        </Text>
+      </View>
+      <TextButton
+        label="Done"
+        labelStyle={{ paddingTop: 12 }}
+        buttonContainerStyle={{
+          height: 50,
+          marginBottom: SIZES.padding,
+          borderRadius: SIZES.radius,
+          backgroundColor: COLORS.primary,
+        }}
+        onPress={() => navigation.navigate("DeliveryStatus")}
+      />
+    </View>
+  );
+};
+
+export default Success;
